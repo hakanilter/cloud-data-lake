@@ -1,0 +1,28 @@
+services:
+  airflow:    
+    image: datapyro/airflow:latest
+    environment:
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__LOAD_DEFAULT_CONNECTIONS: "false"
+      AIRFLOW__CORE__LOGGING_LEVEL: INFO
+      AIRFLOW__SECRETS__BACKEND: airflow.secrets.local_filesystem.LocalFilesystemBackend
+      AIRFLOW__SECRETS__BACKEND_KWARGS: '{"variables_file_path":"/root/airflow/variables.json"}'
+      AIRFLOW__WEBSERVER__WORKERS: 1
+      DAGS_FOLDER: /root/airflow/dags
+      ENV: stage
+    ports:
+      - 8080:8080
+    volumes:
+      - ./dags:/root/airflow/dags
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:13-alpine
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: "airflow"
+      POSTGRES_PASSWORD: "airflow"
+      POSTGRES_DB: "airflow"

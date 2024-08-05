@@ -1,0 +1,15 @@
+
+version: 2
+
+models:
+  - name: product
+    description: "Product entity"
+    columns:
+      - name: _sk_product_id
+        description: "The primary key"
+        tests:
+          - unique
+          - not_null
+      - name: asin
+        tests:
+          - not_null

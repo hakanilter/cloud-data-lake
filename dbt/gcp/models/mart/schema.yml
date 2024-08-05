@@ -1,0 +1,12 @@
+
+version: 2
+
+models:
+  - name: dim_brand
+    description: "Brand dimension table"
+    columns:
+      - name: _sk_brand_id
+        description: "The primary key"
+        tests:
+          - unique
+          - not_null
