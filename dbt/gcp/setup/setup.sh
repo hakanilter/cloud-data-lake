@@ -1,5 +1,5 @@
 #!/bin/sh
-PROJECT_ID="datapyro"
+PROJECT_ID="<YOUR-PROJECT-ID>"
 REGION="europe-west2"
 BUCKET_NAME="${PROJECT_ID}-cloud-data-lake"
 
